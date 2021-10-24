@@ -1,3 +1,5 @@
+int sensorPin = A0; // select the input pin for LDR
+
 #include <dht11.h>
 #include <LiquidCrystal.h>
 LiquidCrystal lcd(12, 11, 5, 4, 3, 2);
@@ -6,16 +8,24 @@ dht11 DHT11;
 int a;
 int b;
 
-void setup()
-{
-Serial.begin(9600);
+int l = 0; // variable to store the value coming from the sensor
+void setup() {
 
+
+
+  
+Serial.begin(9600); //sets serial port for communication
 // set up the LCD's number of columns and rows:
 lcd.begin(16,2);
 
+
 }
-void loop()
-{
+void loop() {
+l = analogRead(sensorPin); // read the value from the sensor
+
+
+
+
 DHT11.read(DHT11PIN);
 
 a = DHT11.temperature;
@@ -29,6 +39,8 @@ Serial.print(a);
 Serial.print("T");
 Serial.print(b);
 Serial.print("H");
+Serial.print(l);
+Serial.print("L");
 Serial.println();
 
 delay(2000);
